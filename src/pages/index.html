@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SDK Examples</title>
+  </head>
+  <body>
+    <div class="container">
+      <h1>SDK Examples</h1>
+      <div class="example">
+        <h2>Introduction to the Showrunnr SDK</h2>
+        <div class="example-flex">
+          <div class="ul-flex">
+            <p>
+              This SDK allows us to easily integrate with our service. Before we
+              can use the SDK, we should ensoure that we have the following
+              environment variables set:
+            </p>
+            <ul class="code-example">
+              <pre><code>
+<strong>process.env.API_KEY:</strong>  API key token.
+<strong>process.env.API_SECRET:</strong>  API secret key.
+            </code></pre>
+            </ul>
+          </div>
+          <p>
+            After setting up .env, ensure we should have the following HTML tag
+            set in our document where the components will render:
+          </p>
+          <div class="code-example">
+            <pre><code>
+&lt;!-- SDK CONTAINER --&gt;
+ 
+
+    &lt;div id="account-container"&gt;&lt;/div&gt;
+
+                </code></pre>
+          </div>
+          <p>
+            Any id can be set to HTML tags, and that same id needs to be passed
+            to the component in order to render it. After setting up the
+            container, we can set the connect function and pass in the env keys:
+          </p>
+        </div>
+        <div class="code-example" style="margin-top: 20px; margin-bottom: 20px">
+          <pre><code>
+            
+const sdk = new ShowrunnrSDK();
+sdk.connect(process.env.API_KEY, process.env.API_SECRET);
+          
+            </code></pre>
+        </div>
+        <p>
+          and now we can import the SDK and mount its components as shown in
+          examples below:
+        </p>
+      </div>
+
+      <div class="example">
+        <h2>Account Component</h2>
+        <div class="example-flex">
+          <p>
+            This component displays a list of accounts in JSON format. Use the
+            following code to render it:
+          </p>
+          <div class="code-example">
+            <pre><code>
+const accountContainer = document.getElementById("account-container");
+if (accountContainer) sdk.renderAccounts(accountContainer);
+          </code></pre>
+          </div>
+          <p>Which will render:</p>
+        </div>
+        <div id="account-container"></div>
+      </div>
+      
+     
+
+
+      <div class="example">
+        <h2>Card Component</h2>
+        <div class="example-flex">
+          <p>
+            This component displays a list of user cards. Use the following code
+            to render it:
+          </p>
+          <div class="code-example">
+            <pre><code>
+  const container = document.getElementById("user-list-container");
+  if (container) sdk.renderCards(container, 6);
+          </code></pre>
+          </div>
+
+          <p>
+            By passing in the number 6 we specify how many cards per page we
+            want. That will render:
+          </p>
+        </div>
+      </br>
+        <div class="example-flex">
+          <div id="user-list-container"></div>
+        </div>
+      </div>
+
+      <div class="example">
+        <h2>Register user form</h2>
+        <div class="example-flex">
+          <p>
+            This component displays forms for user registering.
+            <b>It is still work in progress, currently the submit will only console log the input values.</b>
+          </br>
+        </br>
+          Using the following to render:
+          </p>
+          <div class="code-example">
+            <pre><code>
+   const userRegister = document.getElementById("user-register");
+
+   const accountForm = sdk.createForm("people").defaultSignupForm();
+              
+   if (userRegister) userRegister.appendChild(accountForm);
+          </code></pre>
+          </div>
+          <p>Which will render:</p>
+        </div>
+      </br>
+        <div class="example-flex">
+          <div id="user-register"></div>
+        </div>
+      </div>
+
+      <div class="example">
+        <h2>Custom form</h2>
+        <div class="example-flex">
+          <p>
+          This is a way to generate custom form, with different types and inputs, and also different styles.
+          <b>It is still work in progress, currently the submit will only console log the input values.</b>
+          </br>
+        </br>
+          Use the following code to render it:
+          </p>
+          <div class="code-example">
+            <pre><code>
+const customFormContainer = document.getElementById("custom-form");
+
+const customForm = sdk.createForm("account").with({
+  formElements: {
+    username: { type: "text", placeholder: "Enter your username" },
+    password: { type: "password", placeholder: "Enter your password" },
+  },
+  formStyle: {
+    display: "flex",
+    flexDirection: "column",
+    padding: "20px",
+    border: "1px solid #ccc",
+    borderRadius: "4px",
+    backgroundColor: "#f9f9f9",
+    gap: "20px",
+  },
+  elementStyles: {
+    input: {
+      padding: "10px",
+      fontSize: "16px",
+      marginBottom: "10px",
+      borderRadius: "4px",
+      border: "1px solid #ccc",
+    },
+    button: {
+      padding: "10px 20px",
+      backgroundColor: "#007bff",
+      color: "#fff",
+      border: "none",
+      borderRadius: "4px",
+      cursor: "pointer",
+      width: "200px",
+    },
+  },
+});
+
+if (customFormContainer) customFormContainer.appendChild(customForm);
+
+          </code></pre>
+          </div>
+<p>Which will render:</p>
+        </div>
+      </br>
+        <div class="example-flex">
+          <div id="custom-form"></div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
