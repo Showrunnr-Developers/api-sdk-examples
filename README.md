@@ -61,7 +61,7 @@ Here’s how to integrate the Showrunnr SDK into your existing web application:
    - In your JavaScript code, initialize the SDK using the following commands:
      ```javascript
      const sdk = new ShowrunnrSDK();
-     sdk.connect(process.env.API_KEY, process.env.API_SECRET);
+     await sdk.connect(process.env.API_KEY, process.env.API_SECRET);
      ```
 
 4. **Set up the Account Component**
