@@ -3,7 +3,7 @@ import "@sr-engineering/sr-api-sdk/showrunnr-sdk.css";
 import ShowrunnrSDK from "@sr-engineering/sr-api-sdk";
 
 const sdk = new ShowrunnrSDK();
-sdk.connect(process.env.API_KEY, process.env.API_SECRET);
+await sdk.connect(process.env.API_KEY, process.env.API_SECRET);
 
 //Account JSON
 
